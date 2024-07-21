@@ -1,13 +1,8 @@
 from pysmiles import write_smiles, fill_valence
 import matplotlib.pyplot as plt
-import read_mol2
+import read_mol2  ## tips: the py-files in this catalogue
 import networkx as nx
 
-
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 def linearco(molecule1, lian):
     fp = molecule1.copy()
@@ -24,7 +19,7 @@ def linearco(molecule1, lian):
 
 
 def hunco(molecules, lian):   # 方形
-    num = 2  # 聚合度
+    num = 2  # 聚合度(degree of polymerization,dp)
 
 
 def paint_molecule(G):
@@ -38,7 +33,7 @@ def paint_molecule(G):
     # 获取节点标签（显示element属性）
     node_labels = {node: f"{node}: {G.nodes[node]['element']}" for node in G.nodes}
 
-    # 绘制图
+    # plot
     pos = nx.spring_layout(G)  # 布局
     nx.draw(G, pos, labels=node_labels, with_labels=True, node_size=500, node_color=node_colors, font_weight='bold')
     labels = nx.get_edge_attributes(G, 'weight')
@@ -50,7 +45,7 @@ def paint1(atom_info, atom_coords):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    # 提取原子序号、元素种类和坐标
+    # Extract atomic sequence number, element type, and coordinates
     atom_indices = [info[0] for info in atom_info]
     atom_types = [info[1] for info in atom_info]
     xs = [coord[0] for coord in atom_coords]
@@ -79,8 +74,6 @@ def paint1(atom_info, atom_coords):
 
     plt.show()
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     filename = "./result.mol2"
     atom_list, bond_list, dika_list = read_mol2.read_mol2(filename)
